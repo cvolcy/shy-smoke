@@ -65,14 +65,14 @@ function setCaplockState(e: KeyboardEvent) {
           <div class="grid items-center w-full gap-4">
             <div class="flex flex-col space-y-1.5">
               <Label for="email">Email</Label>
-              <Input id="email" v-model="usernameOrEmail" placeholder="somebody@example.com" />
+              <input id="email" class="text-slate-500" v-model="usernameOrEmail" placeholder="somebody@example.com" />
             </div>
             <div class="flex flex-col space-y-1.5">
               <Label for="password">Password</Label>
               <div class="relative">
-                <Input v-if="showPassword" class="pr-14" type="text" id="password" v-model="password"
+                <input v-if="showPassword" class="pr-14" type="text" id="password" v-model="password"
                   placeholder="MyS3cureP4ssw0rd" />
-                <Input v-else class="pr-14" type="password" id="password" v-model="password"
+                <input v-else class="pr-14 text-slate-500" type="password" id="password" v-model="password"
                   placeholder="MyS3cureP4ssw0rd" />
                 <ArrowBigUpDashIcon v-if="showCapsLock" class="absolute top-2 right-8 h-5 w-5 text-muted-foreground" />
                 <component :is="showPassword ? EyeIcon : EyeOffIcon"
