@@ -20,4 +20,11 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: "",
   },
+  runtimeConfig: {
+    BACKENDBASE_ADMIN_USER: process.env.BACKENDBASE_ADMIN_USER,
+    BACKENDBASE_ADMIN_PASS: process.env.BACKENDBASE_ADMIN_PASS,
+    public: {
+      BACKENDBASE_URL: process.env.BACKENDBASE_URL
+    }
+  }
 })
