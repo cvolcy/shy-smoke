@@ -1,12 +1,17 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
+
 definePageMeta({
-    name: 'login',
-    allowAnonymous: true
+  name: 'login',
+  layout: 'auth',
+  allowAnonymous: true
 });
 
 const { $pb } = useNuxtApp()
 
-const usernameOrEmail = ref('')
+const usernameOrEmailCookie = useCookie('usernameOrEmail')
+
+const usernameOrEmail = ref(usernameOrEmailCookie.value ?? '')
 const password = ref('')
 const rememberme = ref(false)
 const showPassword = ref(false)
@@ -14,7 +19,7 @@ const showCapsLock = ref(false)
 const showErrorMsg = ref(false)
 
 async function onLogin(e: Event) {
-    e.preventDefault()
+  e.preventDefault()
   try {
     // const { data, error } = await useFetch('/api/auth/login', {
     //   method: 'post',
@@ -28,7 +33,7 @@ async function onLogin(e: Event) {
     // if (error.value) throw error.value
 
     await $pb.collection('users').authWithPassword(usernameOrEmail.value, password.value);
-
+    usernameOrEmailCookie.value = usernameOrEmail.value;
     redirect()
   }
   catch (error) {
@@ -54,8 +59,8 @@ function setCaplockState(e: KeyboardEvent) {
 
 </script>
 <template>
-    <div>
-    <Card class="w-[350px]">
+  <div class="h-svh flex flex-col align-center justify-center">
+    <Card class="w-[350px] mx-auto">
       <CardHeader>
         <CardTitle>Login</CardTitle>
         <CardDescription>Welcome Back</CardDescription>
@@ -65,30 +70,38 @@ function setCaplockState(e: KeyboardEvent) {
           <div class="grid items-center w-full gap-4">
             <div class="flex flex-col space-y-1.5">
               <Label for="email">Email</Label>
-              <input id="email" class="text-slate-500" v-model="usernameOrEmail" placeholder="somebody@example.com" />
+              <Input id="email" class="text-slate-500" v-model="usernameOrEmail" placeholder="somebody@example.com" />
             </div>
             <div class="flex flex-col space-y-1.5">
               <Label for="password">Password</Label>
               <div class="relative">
-                <input v-if="showPassword" class="pr-14" type="text" id="password" v-model="password"
+                <Input v-if="showPassword" class="pr-14" type="text" id="password" v-model="password"
                   placeholder="MyS3cureP4ssw0rd" />
-                <input v-else class="pr-14 text-slate-500" type="password" id="password" v-model="password"
+                <Input v-else class="pr-14 text-slate-500" type="password" id="password" v-model="password"
                   placeholder="MyS3cureP4ssw0rd" />
-                <ArrowBigUpDashIcon v-if="showCapsLock" class="absolute top-2 right-8 h-5 w-5 text-muted-foreground" />
-                <component :is="showPassword ? EyeIcon : EyeOffIcon"
+                <Icon
+                  v-if="showCapsLock"
+                  class="absolute top-2 right-8 h-5 w-5 text-muted-foreground"
+                  icon="lucide:arrow-big-up-dash"
+                />
+                <Icon
+                  v-if="showPassword"
                   class="absolute top-2 right-2 h-5 w-5 text-muted-foreground cursor-pointer hover:opacity-75 transition"
-                  @click="showPassword = !showPassword" />
+                  icon="lucide:eye"
+                  @click="showPassword = !showPassword"
+                />
+                <Icon
+                  v-else
+                  class="absolute top-2 right-2 h-5 w-5 text-muted-foreground cursor-pointer hover:opacity-75 transition"
+                  icon="lucide:eye-off"
+                  @click="showPassword = !showPassword"
+                />
               </div>
             </div>
             <div class="flex items-center space-x-2">
-              <Checkbox id="rememberme"
-                :checked="rememberme"
-                @update:checked="(payload) => rememberme = payload"
-              />
-              <label
-                for="rememberme"
-                class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
+              <Checkbox id="rememberme" :checked="rememberme" @update:checked="(payload:boolean) => rememberme = payload" />
+              <label for="rememberme"
+                class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                 Remember me?
               </label>
             </div>
