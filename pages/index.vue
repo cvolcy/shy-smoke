@@ -1,3 +1,5 @@
 <template>
-    dashboard
+    <div class="container">
+        dashboard
+    </div>
 </template>
