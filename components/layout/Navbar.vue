@@ -4,7 +4,7 @@ import { Icon } from '@iconify/vue';
 const { $pb } = useNuxtApp();
 
 const currentUser = $pb.authStore.record!;
-const avatarUrl = $pb.files.getUrl(currentUser, currentUser.avatar, { 'thumb': '40x40' });
+const avatarUrl = $pb.files.getURL(currentUser, currentUser.avatar, { 'thumb': '40x40' });
 const initials = currentUser.name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase();
 </script>
 <template>

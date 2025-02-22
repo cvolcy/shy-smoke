@@ -3,10 +3,42 @@ import { ref } from 'vue';
 import { Icon } from '@iconify/vue';
 
 const activateSidebarHeader = ref(false);
+
+const menuItems = [{
+    label: 'Dashboard',
+    icon: 'lucide:layout-dashboard',
+    to: '/',
+    iconColor: 'text-sky-500'
+},{
+    label: 'Conversation',
+    icon: 'lucide:message-square-text',
+    to: '/',
+    iconColor: 'text-violet-500'
+},{
+    label: 'Image Generation',
+    icon: 'lucide:image',
+    to: '/',
+    iconColor: 'text-pink-700'
+},{
+    label: 'Video Generation',
+    icon: 'lucide:video',
+    to: '/',
+    iconColor: 'text-orange-700'
+},{
+    label: 'Music Generation',
+    icon: 'lucide:music',
+    to: '/',
+    iconColor: 'text-emerald-700'
+},{
+    label: 'Code Generation',
+    icon: 'lucide:code',
+    to: '/',
+    iconColor: 'text-green-700'
+}];
 </script>
 <template>
     <Sidebar class="bg-neutral-900" collapsible="icon">
-        <SidebarHeader class="flex-row items-center">
+        <SidebarHeader v-if="!activateSidebarHeader" class="flex-row items-center">
                 <Logo class="fill-slate-300 size-8" />
             <SidebarGroup class="group-data-[collapsible=icon]:hidden">
                 <span class="text-2xl font-mono text-nowrap">
@@ -61,8 +93,31 @@ const activateSidebarHeader = ref(false);
             </SidebarMenu>
         </SidebarHeader>
         <SidebarContent>
+            <SidebarGroup>
+                <SidebarGroupLabel>Plaform</SidebarGroupLabel>
+                <SidebarMenu>
+                    <SidebarMenuItem v-for="menuItem in menuItems">
+                        <SidebarMenuButton as-child>
+                            <NuxtLink :to="menuItem.to">
+                                <Icon :icon="menuItem.icon" :class="menuItem.iconColor" width="24" height="24" />
+                                <span>{{ menuItem.label }}</span>
+                            </NuxtLink>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                </SidebarMenu>
+            </SidebarGroup>
         </SidebarContent>
         <SidebarFooter>
+            <SidebarMenu>
+                <SidebarMenuItem>
+                    <SidebarMenuButton as-child>
+                        <NuxtLink to="/">
+                            <Icon icon="lucide:settings" width="24" height="24" />
+                            <span>Settings</span>
+                        </NuxtLink>
+                    </SidebarMenuButton>
+                </SidebarMenuItem>
+            </SidebarMenu>
             <SidebarMenu>
                 <SidebarMenuItem>
                     <LayoutUserButton
