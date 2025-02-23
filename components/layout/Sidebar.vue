@@ -3,6 +3,8 @@ import { ref } from 'vue';
 import { Icon } from '@iconify/vue';
 import type { Product } from '~/server/api/products/index.get';
 
+const route = useRoute();
+
 const activateSidebarHeader = ref(false);
 
 const _ = ['text-sky-500', 'text-violet-500', 'text-emerald-500', 'text-pink-700', 'text-orange-500', 'text-green-500'];
@@ -71,7 +73,7 @@ products.value = data.value!
                 <SidebarGroupLabel>Plaform</SidebarGroupLabel>
                 <SidebarMenu>
                     <SidebarMenuItem v-for="product in products">
-                        <SidebarMenuButton as-child>
+                        <SidebarMenuButton as-child :is-active="route.path === product.to ? true : undefined">
                             <NuxtLink :to="product.to">
                                 <Icon :icon="product.icon" :class="product.iconColor" width="24" height="24" />
                                 <span>{{ product.label }}</span>
