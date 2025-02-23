@@ -1,40 +1,14 @@
 <script setup lang="ts">
 import { cn } from '@/lib/utils';
 import { Icon } from '@iconify/vue';
+import type { Product } from '~/server/api/products/index.get';
 
 const router = useRouter();
 
-const tools = [{
-    label: 'Conversation',
-    icon: 'lucide:message-square-text',
-    iconColor: 'text-violet-500',
-    bgColor: 'bg-violet-500/10',
-    href: '/conversation'
-},{
-    label: 'Music Generation',
-    icon: 'lucide:music',
-    iconColor: 'text-emerald-500',
-    bgColor: 'bg-emerald-500/10',
-    href: '/music'
-},{
-    label: 'Image Generation',
-    icon: 'lucide:image',
-    iconColor: 'text-pink-700',
-    bgColor: 'bg-pink-700/10',
-    href: '/image'
-},{
-    label: 'Video Generation',
-    icon: 'lucide:video',
-    iconColor: 'text-orange-500',
-    bgColor: 'bg-orange-500/10',
-    href: '/video'
-},{
-    label: 'Code Generation',
-    icon: 'lucide:code',
-    iconColor: 'text-green-500',
-    bgColor: 'bg-green-500/10',
-    href: '/code'
-}];
+const _ = ['text-violet-500', 'bg-violet-500/10', 'text-emerald-500', 'bg-emerald-500/10', 'text-pink-700', 'bg-pink-700/10', 'text-orange-500', 'bg-orange-500/10', 'text-green-500', 'bg-green-500/10',];
+const products = ref<Array<Product>>([]);
+const { data } = await useFetch('/api/products');
+products.value = data.value!.filter( x => x.id != 'dashboard' )
 </script>
 <template>
     <div class="container">
@@ -47,19 +21,19 @@ const tools = [{
             </p>
             <div class="px-4 md:px-20 lg:px-32 space-y-4">
                 <Card
-                    v-for="tool in tools"
-                    :key="tool.href"
+                    v-for="product in products"
+                    :key="product.to"
                     class="p-4 border-black/5 hover:shadow-md transition cursor-pointer"
-                    @click="router.push(tool.href)"
+                    @click="router.push(product.to)"
                 >
                     <CardContent class="p-0">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap-x-4">
-                                <div :class="cn('p-2 w-fit rounded-md', tool.bgColor)">
-                                    <Icon :icon="tool.icon" :class="cn('w-8 h-8', tool.iconColor)" />
+                                <div :class="cn('p-2 w-fit rounded-md', product.bgColor)">
+                                    <Icon :icon="product.icon" :class="cn('w-8 h-8', product.iconColor)" />
                                 </div>
                                 <div class="font-semibold">
-                                    {{ tool.label }}
+                                    {{ product.label }}
                                 </div>
                             </div>
                             <Icon icon="lucide:arrow-right" class="w-5 h-5" />

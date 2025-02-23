@@ -1,40 +1,14 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import { Icon } from '@iconify/vue';
+import type { Product } from '~/server/api/products/index.get';
 
 const activateSidebarHeader = ref(false);
 
-const menuItems = [{
-    label: 'Dashboard',
-    icon: 'lucide:layout-dashboard',
-    to: '/',
-    iconColor: 'text-sky-500'
-},{
-    label: 'Conversation',
-    icon: 'lucide:message-square-text',
-    to: '/',
-    iconColor: 'text-violet-500'
-},{
-    label: 'Image Generation',
-    icon: 'lucide:image',
-    to: '/',
-    iconColor: 'text-pink-700'
-},{
-    label: 'Video Generation',
-    icon: 'lucide:video',
-    to: '/',
-    iconColor: 'text-orange-700'
-},{
-    label: 'Music Generation',
-    icon: 'lucide:music',
-    to: '/',
-    iconColor: 'text-emerald-700'
-},{
-    label: 'Code Generation',
-    icon: 'lucide:code',
-    to: '/',
-    iconColor: 'text-green-700'
-}];
+const _ = ['text-sky-500', 'text-violet-500', 'text-emerald-500', 'text-pink-700', 'text-orange-500', 'text-green-500'];
+const products = ref<Array<Product>>([]);
+const { data } = await useFetch('/api/products');
+products.value = data.value!
 </script>
 <template>
     <Sidebar class="bg-neutral-900" collapsible="icon">
@@ -96,11 +70,11 @@ const menuItems = [{
             <SidebarGroup>
                 <SidebarGroupLabel>Plaform</SidebarGroupLabel>
                 <SidebarMenu>
-                    <SidebarMenuItem v-for="menuItem in menuItems">
+                    <SidebarMenuItem v-for="product in products">
                         <SidebarMenuButton as-child>
-                            <NuxtLink :to="menuItem.to">
-                                <Icon :icon="menuItem.icon" :class="menuItem.iconColor" width="24" height="24" />
-                                <span>{{ menuItem.label }}</span>
+                            <NuxtLink :to="product.to">
+                                <Icon :icon="product.icon" :class="product.iconColor" width="24" height="24" />
+                                <span>{{ product.label }}</span>
                             </NuxtLink>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
