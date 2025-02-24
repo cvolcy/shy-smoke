@@ -1,6 +1,7 @@
 export interface Product {
     id: string,
     label: string,
+    description: string,
     icon: string,
     iconColor: string,
     bgColor: string,
@@ -24,6 +25,7 @@ export default defineEventHandler((event) => {
     },{
         id: 'conversation',
         label: 'Conversation',
+        description: 'Our most advanced conversation model.',
         icon: 'lucide:message-square-text',
         iconColor: 'text-violet-500',
         bgColor: 'bg-violet-500/10',
