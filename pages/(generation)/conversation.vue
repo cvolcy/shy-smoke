@@ -2,22 +2,49 @@
 import * as z from 'zod';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useForm } from 'vee-validate'
+import type { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
 
 const { data: product } = await useFetch(`/api/products/conversation`)
 
-const formSchema = toTypedSchema(z.object({
+const formSchema = z.object({
     prompt: z.string().min(1, {
         message: "Prompt is required."
     })
-}))
-
-const form = useForm({
-    validationSchema: formSchema
 })
 
-async function onSubmit (values: z.infer<any>) {
-    console.log(values);
-}
+const form = useForm({
+    validationSchema: toTypedSchema(formSchema)
+})
+const { isSubmitting } = form
+
+const messages = ref<ChatCompletionMessageParam[]>([])
+
+const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) => {
+    try {
+        debugger;
+        const userMessage: ChatCompletionMessageParam = {
+            role: 'user',
+            content: values.prompt
+        }
+
+        const newMessages = [...messages.value, userMessage]
+
+        const { data } = await useFetch<ChatCompletionMessageParam[]>('/api/conversation', {
+            method: 'POST',
+            body: {
+                messages: newMessages
+            }
+        })
+
+        messages.value = [...newMessages, ...data.value!]
+
+        form.resetForm()
+    } catch (error: any) {
+        console.log(error);
+    }
+
+    return false;
+})
 </script>
 <template>
     <div class="container">
@@ -32,7 +59,7 @@ async function onSubmit (values: z.infer<any>) {
             <div>
                 <form
                     class="rounded-md border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2"
-                    @submit="form.handleSubmit(onSubmit)"
+                    @submit.prevent.stop="onSubmit"
                 >
                     <FormField
                         v-slot="{ componentField }"
@@ -45,7 +72,7 @@ async function onSubmit (values: z.infer<any>) {
                                     type="text"
                                     placeholder="What is the One piece ?"
                                     v-bind="componentField"
-                                    :disabled="form.isSubmitting"
+                                    :disabled="isSubmitting"
                                 />
                             </FormControl>
                             <FormMessage />
@@ -53,14 +80,21 @@ async function onSubmit (values: z.infer<any>) {
                     </FormField>
                     <Button
                         class="col-span-12 md:col-span-4 lg:col-span-2"
-                        :disabled="form.isSubmitting"
+                        :disabled="isSubmitting"
                     >
                         Generate
                     </Button>
                 </form>
             </div>
             <div class="space-y-4 mt-4">
-                Messages Content
+                <div v-if="messages.length === 0 && !isSubmitting">
+                    <Empty label="No conversation started" fill="#8b5cf6" />
+                </div>
+                <div class="flex flex-col-reverse gap-y-4">
+                    <div v-for="message in messages" :key="message.content?.toString()">
+                        {{ message.content }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
