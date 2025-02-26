@@ -15,7 +15,7 @@ const initials = currentUser.name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g
             </Button>
         </div>
         <div class="flex w-full justify-end px-2">
-            <LayoutUserButton>
+            <UserButton>
                 <Button variant="ghost" size="icon">
                     <Avatar class="h-8 w-8 rounded-lg">
                         <AvatarImage :src="avatarUrl" :alt="currentUser.username" />
@@ -24,7 +24,7 @@ const initials = currentUser.name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g
                         </AvatarFallback>
                     </Avatar>
                 </Button>
-            </LayoutUserButton>
+            </UserButton>
         </div>
     </header>
 </template>

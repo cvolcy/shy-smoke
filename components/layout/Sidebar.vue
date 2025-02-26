@@ -96,7 +96,7 @@ products.value = data.value!
             </SidebarMenu>
             <SidebarMenu>
                 <SidebarMenuItem>
-                    <LayoutUserButton
+                    <UserButton
                         side="bottom"
                         :in-sidebar="true"
                     />

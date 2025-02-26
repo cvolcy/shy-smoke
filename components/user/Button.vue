@@ -24,12 +24,7 @@ function onLogOutClick() {
             <component :is="inSidebar ? SidebarMenuButton : 'div'" size="lg"
                 class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
                 <slot>
-                    <Avatar class="h-8 w-8 rounded-lg">
-                        <AvatarImage :src="avatarUrl" :alt="currentUser.username" />
-                        <AvatarFallback class="rounded-lg">
-                            {{ initials }}
-                        </AvatarFallback>
-                    </Avatar>
+                    <UserAvatar />
                     <div class="grid flex-1 text-left text-sm leading-tight">
                         <span class="truncate font-semibold">{{ currentUser.name }}</span>
                         <span class="truncate text-xs">{{ currentUser.username }}</span>
