@@ -111,7 +111,7 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
                             v-else
                             initials="BOT"
                             username="bot"
-                            url="/logo.svg"
+                            url="/logo-reverse.svg"
                         />
                         <p class="text-sm self-center">
                             {{ message.content }}

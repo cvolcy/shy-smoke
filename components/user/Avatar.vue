@@ -11,17 +11,18 @@ const props = defineProps<{
 
 const currentUser = $pb.authStore.record!;
 
-const useCurrentUser = computed(() => props.url || props.username || props.initials)
+const useCurrentUser = computed(() => !props.url || !props.username || !props.initials)
 
-const avatarUrl = computed(() => useCurrentUser ? $pb.files.getURL(currentUser, currentUser.avatar, { 'thumb': '40x40' }) : props.url)
-const username = computed(() => useCurrentUser ? currentUser.username : props.username)
-const initials = computed(() => useCurrentUser ? currentUser.name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase() : props.initials)
+const _avatarUrl = computed(() => useCurrentUser.value ? $pb.files.getURL(currentUser, currentUser.avatar, { 'thumb': '40x40' }) : props.url)
+const _username = computed(() => useCurrentUser.value ? currentUser.username : props.username)
+const _initials = computed(() => useCurrentUser.value ? currentUser.name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase() : props.initials)
+debugger;
 </script>
 <template>
     <Avatar class="h-8 w-8 rounded-lg">
-        <AvatarImage :src="avatarUrl!" :alt="username" />
+        <AvatarImage :src="_avatarUrl!" :alt="_username" />
         <AvatarFallback class="rounded-lg">
-            {{ initials }}
+            {{ _initials }}
         </AvatarFallback>
     </Avatar>
 </template>
