@@ -3,6 +3,7 @@ import * as z from 'zod';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useForm } from 'vee-validate'
 import type { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
+import { cn } from '@/lib/utils';
 
 const { data: product } = await useFetch(`/api/products/conversation`)
 
@@ -86,12 +87,35 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
                 </form>
             </div>
             <div class="space-y-4 mt-4">
+                <div
+                    v-if="isSubmitting"
+                    class="p-8 rounded-lg w-full flex items-center justify-center bg-muted"
+                >
+                    <Loader />
+                </div>
                 <div v-if="messages.length === 0 && !isSubmitting">
                     <Empty label="No conversation started" fill="#8b5cf6" />
                 </div>
                 <div class="flex flex-col-reverse gap-y-4">
-                    <div v-for="message in messages" :key="message.content?.toString()">
-                        {{ message.content }}
+                    <div
+                        v-for="message in messages"
+                        :key="message.content?.toString()"
+                        :class="cn(
+                            'p-8 w-full flex items-start gap-x-8 rounded-lg',
+                            message.role === 'user'
+                            ? 'bg-white border border-black/10 text-slate-800 flex-row-reverse' : 'bg-muted'
+                        )"
+                    >
+                        <UserAvatar v-if="message.role === 'user'" />
+                        <UserAvatar
+                            v-else
+                            initials="BOT"
+                            username="bot"
+                            url="/logo.svg"
+                        />
+                        <p class="text-sm self-center">
+                            {{ message.content }}
+                        </p>
                     </div>
                 </div>
             </div>
