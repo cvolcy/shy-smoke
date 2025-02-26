@@ -21,7 +21,6 @@ const messages = ref<ChatCompletionMessageParam[]>([])
 
 const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) => {
     try {
-        debugger;
         const userMessage: ChatCompletionMessageParam = {
             role: 'user',
             content: values.prompt
