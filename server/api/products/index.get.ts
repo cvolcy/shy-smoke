@@ -6,6 +6,7 @@ export interface Product {
     iconColor: string,
     bgColor: string,
     to: string,
+    disabled?: boolean,
 }
 
 export default defineEventHandler((event) => {
@@ -15,7 +16,7 @@ export default defineEventHandler((event) => {
             statusMessage: 'Unauthorized Access',
         });
 
-    return [{
+    let products = [{
         id: 'dashboard',
         label: 'Dashboard',
         icon: 'lucide:layout-dashboard',
@@ -36,21 +37,25 @@ export default defineEventHandler((event) => {
         icon: 'lucide:music',
         iconColor: 'text-emerald-500',
         bgColor: 'bg-emerald-500/10',
-        to: '/music'
+        to: '/music',
+        disabled: true
     },{
         id: 'image',
         label: 'Image Generation',
+        description: 'Turn your prompt into an image',
         icon: 'lucide:image',
         iconColor: 'text-pink-700',
         bgColor: 'bg-pink-700/10',
-        to: '/image'
+        to: '/image',
+        disabled: true
     },{
         id: 'video',
         label: 'Video Generation',
         icon: 'lucide:video',
         iconColor: 'text-orange-500',
         bgColor: 'bg-orange-500/10',
-        to: '/video'
+        to: '/video',
+        disabled: true
     },{
         id: 'code',
         label: 'Code Generation',
@@ -60,4 +65,12 @@ export default defineEventHandler((event) => {
         bgColor: 'bg-green-500/10',
         to: '/code'
     }] as Array<Product>;
+
+    const query = getQuery(event)
+
+    if (!query.includeDisabled) {
+        products = products.filter(x => !x.disabled)
+    }
+
+    return products;
 })
