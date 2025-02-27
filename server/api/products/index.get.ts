@@ -54,6 +54,7 @@ export default defineEventHandler((event) => {
     },{
         id: 'code',
         label: 'Code Generation',
+        description: 'Generate code using descriptive text.',
         icon: 'lucide:code',
         iconColor: 'text-green-500',
         bgColor: 'bg-green-500/10',

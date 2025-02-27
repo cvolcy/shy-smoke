@@ -16,7 +16,6 @@ const useCurrentUser = computed(() => !props.url || !props.username || !props.in
 const _avatarUrl = computed(() => useCurrentUser.value ? $pb.files.getURL(currentUser, currentUser.avatar, { 'thumb': '40x40' }) : props.url)
 const _username = computed(() => useCurrentUser.value ? currentUser.username : props.username)
 const _initials = computed(() => useCurrentUser.value ? currentUser.name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase() : props.initials)
-debugger;
 </script>
 <template>
     <Avatar class="h-8 w-8 rounded-lg">

@@ -33,6 +33,12 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
             method: 'POST',
             body: {
                 messages: newMessages
+            },
+            transform: (input: ChatCompletionMessageParam[]) => {
+                return input.map(x => ({
+                    role: x.role,
+                    content: x.content
+                }) as ChatCompletionMessageParam);
             }
         })
 
