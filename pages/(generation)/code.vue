@@ -109,7 +109,7 @@ const mdPlugin = (mdInstance: any) => {
                     <Loader />
                 </div>
                 <div v-if="messages.length === 0 && !isSubmitting">
-                    <Empty label="No conversation started" fill="#8b5cf6" />
+                    <Empty label="No code generated" fill="#22c55e" />
                 </div>
                 <div class="flex flex-col-reverse gap-y-4">
                     <div
