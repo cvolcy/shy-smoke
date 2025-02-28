@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import * as z from 'zod';
-import { toTypedSchema } from '@vee-validate/zod';
+import * as z from 'zod'
+import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
+import { Icon } from '@iconify/vue'
 
 const { data: product } = await useFetch(`/api/products/image`)
 
@@ -42,19 +43,16 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
     try {
 
         images.value = []
-        // const { data } = await useFetch('/api/image', {
-        //     method: 'POST',
-        //     body: {
-        //         prompt: values.prompt,
-        //         amount: values.amount,
-        //         resolution: values.resolution,
-        //     },
-        //     transform: (input: any[]) => {
-        //         return input.map(x => x.url)
-        //     }
-        // })
+        const { data } = await useFetch('/api/image', {
+            method: 'POST',
+            body: {
+                prompt: values.prompt,
+                amount: values.amount,
+                resolution: values.resolution,
+            }
+        })
 
-        // images.value = data.value!
+        images.value = data.value! as Array<string>
         form.resetForm()
     } catch (error: any) {
         console.log(error);
@@ -62,6 +60,10 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
 
     return false;
 })
+
+function openImage(image: string) {
+    window.open(image, '_blank')
+}
 </script>
 <template>
     <div class="container">
@@ -165,8 +167,28 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
                 <div v-if="images.length === 0 && !isSubmitting">
                     <Empty label="No images generated" fill="#be185d" />
                 </div>
-                <div>
-                    images
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8">
+                    <Card v-for="image in images" :key="image">
+                        <CardContent class="p-0">
+                            <div class="relative aspect-square">
+                                <img
+                                    class="w-full rounded-t-xl"
+                                    :src="image"
+                                    alt="Generated image"
+                                />
+                            </div>
+                        </CardContent>
+                        <CardFooter class="p-2">
+                            <Button
+                                variant="secondary"
+                                class="w-full"
+                                @click="openImage(image)"
+                            >
+                                <Icon icon="lucinde:download" class="w-4 h-4 mr-2" />
+                                Download
+                            </Button>
+                        </CardFooter>
+                    </Card>
                 </div>
             </div>
         </div>

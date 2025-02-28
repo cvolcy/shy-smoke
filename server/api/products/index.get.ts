@@ -47,7 +47,7 @@ export default defineEventHandler((event) => {
         iconColor: 'text-pink-700',
         bgColor: 'bg-pink-700/10',
         to: '/image',
-        disabled: true
+        disabled: false
     },{
         id: 'video',
         label: 'Video Generation',
