@@ -34,11 +34,12 @@ export default defineEventHandler((event) => {
     },{
         id: 'music',
         label: 'Music Generation',
+        description: 'Turn your prompt into music',
         icon: 'lucide:music',
         iconColor: 'text-emerald-500',
         bgColor: 'bg-emerald-500/10',
         to: '/music',
-        disabled: true
+        disabled: false
     },{
         id: 'image',
         label: 'Image Generation',
