@@ -24,6 +24,7 @@
     "pocketbase": "^0.25.1",
     "radix-vue": "^1.9.14",
     "reka-ui": "^2.0.0",
+    "replicate": "^1.0.1",
     "shadcn-nuxt": "0.11.3",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
