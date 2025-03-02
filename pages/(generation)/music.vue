@@ -3,6 +3,13 @@ import * as z from 'zod';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useForm } from 'vee-validate'
 
+definePageMeta({
+    validate: async (_) => {
+    const { data } = await useFetch(`/api/products/music`)
+    return !!data.value;
+}
+})
+
 const { data: product } = await useFetch(`/api/products/music`)
 
 const formSchema = z.object({

@@ -5,6 +5,13 @@ import { useForm } from 'vee-validate'
 import type { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
 import { cn } from '@/lib/utils';
 
+definePageMeta({
+  validate: async (_) => {
+    const { data } = await useFetch(`/api/products/conversation`)
+    return !!data.value;
+  }
+})
+
 const { data: product } = await useFetch(`/api/products/conversation`)
 
 const formSchema = z.object({

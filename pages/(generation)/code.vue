@@ -6,6 +6,13 @@ import type { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
 import { cn } from '@/lib/utils';
 import VueMarkdown from 'vue-markdown-render'
 
+definePageMeta({
+  validate: async (_) => {
+    const { data } = await useFetch(`/api/products/code`)
+    return !!data.value;
+  }
+})
+
 const { data: product } = await useFetch(`/api/products/code`)
 
 const formSchema = z.object({

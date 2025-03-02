@@ -4,6 +4,12 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { Icon } from '@iconify/vue'
 
+definePageMeta({
+    validate: async (_) => {
+        const { data } = await useFetch(`/api/products/image`)
+        return !!data.value;
+    }
+})
 const { data: product } = await useFetch(`/api/products/image`)
 
 const formSchema = z.object({
