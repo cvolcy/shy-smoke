@@ -80,7 +80,7 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
                         v-slot="{ componentField }"
                         name="style"
                     >
-                        <FormItem class="col-span-12 lg:col-span-10">
+                        <FormItem class="col-span-12">
                             <FormLabel>Style</FormLabel>
                             <FormControl class="m-0 p-0">
                                 <Input
