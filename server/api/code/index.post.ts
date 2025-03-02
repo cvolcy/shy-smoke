@@ -51,7 +51,7 @@ export default defineEventHandler(async (event) => {
         return response.choices.map(x => x.message);
 
     } catch (error: any) {
-        console.log("Conversation Error", error);
+        console.log("Code Error", error);
         throw createError({
             statusCode: 500,
             statusMessage: error?.message

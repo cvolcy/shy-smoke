@@ -54,7 +54,7 @@ export default defineEventHandler(async (event) => {
         return response.data.map(x => x.url);
 
     } catch (error: any) {
-        console.log("Conversation Error", error);
+        console.log("Image Error", error);
         throw createError({
             statusCode: 500,
             statusMessage: error?.message
