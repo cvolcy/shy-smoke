@@ -52,6 +52,7 @@ export default defineEventHandler((event) => {
     },{
         id: 'video',
         label: 'Video Generation',
+        description: 'Turn your prompt into a video',
         icon: 'lucide:video',
         iconColor: 'text-orange-500',
         bgColor: 'bg-orange-500/10',

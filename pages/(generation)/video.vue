@@ -16,29 +16,29 @@ const formSchema = z.object({
     prompt: z.string().min(1, {
         message: "Prompt is required."
     }),
-    style: z.string().optional()
+    negative: z.string().optional()
 })
 
 const form = useForm({
-    validationSchema: toTypedSchema(formSchema)
+    validationSchema: toTypedSchema(formSchema),
+    initialValues: {
+        negative: "very blue, dust, noisy, washed out, ugly, distorted, broken"
+    }
 })
 const { isSubmitting } = form
 
-const music = ref<string|null>("")
+const video = ref<string|null>("")
 
 const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) => {
     try {
-        music.value = null;
+        video.value = null;
 
-        const { data } = await useFetch<string>('/api/music', {
+        const { data } = await useFetch<string[]>('/api/video', {
             method: 'POST',
-            body: values,
-            transform: (input: any) => {
-                return input.audio;
-            }
+            body: values
         })
 
-        music.value = data.value;
+        video.value = data.value?.length ? data.value[0] : ""
 
         form.resetForm()
     } catch (error: any) {
@@ -75,7 +75,7 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
                                 <Input
                                     class="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                                     type="text"
-                                    placeholder="Piano solo 🎵🎵"
+                                    placeholder="🎥 Clown fish swimming in a coral reef, beautiful, 8k, perfect, award winning, national geographic"
                                     v-bind="componentField"
                                     :disabled="isSubmitting"
                                 />
@@ -85,10 +85,10 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
                     </FormField>
                     <FormField
                         v-slot="{ componentField }"
-                        name="style"
+                        name="negative"
                     >
                         <FormItem class="col-span-12">
-                            <FormLabel>Style</FormLabel>
+                            <FormLabel>Negative Prompt</FormLabel>
                             <FormControl class="m-0 p-0">
                                 <Input
                                     class="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
@@ -116,16 +116,19 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
                 >
                     <Loader />
                 </div>
-                <div v-if="!music && !isSubmitting">
-                    <Empty label="No music generated yet" fill="#10b981" />
+                <div v-if="!video && !isSubmitting">
+                    <Empty label="No video generated yet" fill="#f97316" />
                 </div>
                 <div
-                    v-if="music"
+                    v-if="video"
                     class=""
                 >
-                    <audio controls class="w-full mt-8">
-                        <source :src="music" />
-                    </audio>
+                    <video
+                        class="w-full aspect-video rounded-lg border bg-black mt-8"
+                        controls
+                    >
+                        <source :src="video" />
+                    </video>
                 </div>
             </div>
         </div>
