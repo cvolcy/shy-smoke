@@ -1,34 +1,17 @@
 <script setup lang="ts">
+import { useEventSource } from '@vueuse/core';
+
 defineProps<{
     debug?: boolean
 }>()
 
-let eventSource: EventSource;
-
-const lastEvent = ref(null)
-
-onMounted(() => {
-    closeConnection()
-    eventSource = new EventSource('/api/updates')
-
-    eventSource.onmessage = (event) => {
-        lastEvent.value = event.data
-    }
-})
-
-onUnmounted(closeConnection)
-
-function closeConnection() {
-    if (eventSource) {
-        eventSource.close()
-    }
-}
+const { status, data } = useEventSource('/api/updates')
 </script>
 <template>
     <p
         v-if="debug"
         class="container"
     >
-        {{ lastEvent }}
+        <b>{{ status }}</b> - <em>{{ data }}</em>
     </p>
 </template>
