@@ -2,10 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: [
-    '@nuxtjs/tailwindcss',
-    'shadcn-nuxt'
-  ],
+  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxtjs/i18n'],
   shadcn: {
     /**
      * Prefix for all the imported component
@@ -19,6 +16,16 @@ export default defineNuxtConfig({
   },
   colorMode: {
     classSuffix: "",
+  },
+  i18n: {
+    vueI18n: './i18n.config.ts',
+    strategy: 'no_prefix',
+    langDir: './locales', 
+    locales: [
+      { code: 'en', language: 'en-US', name: 'English', files: ['en.json'] },
+      { code: 'fr', language: 'fr-CA', name: 'Français', files: ['fr.json'] }
+    ],
+    defaultLocale: 'en',
   },
   runtimeConfig: {
     BACKENDBASE_ADMIN_USER: process.env.BACKENDBASE_ADMIN_USER,

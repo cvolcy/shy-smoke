@@ -9,25 +9,27 @@ defineProps<{
     inSidebar?: Boolean,
 }>()
 
+const localePath = useLocalePath()
+
 const currentUser = $pb.authStore.record!;
-const avatarUrl = $pb.files.getURL(currentUser, currentUser.avatar, { 'thumb': '40x40' });
-const initials = currentUser.name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase();
+const avatarUrl = $pb.files.getURL(currentUser, currentUser?.avatar, { 'thumb': '40x40' });
+const initials = currentUser?.name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase();
 
 function onLogOutClick() {
     $pb.authStore.clear();
-    useRouter().push({ name: 'login' })
+    useRouter().push(localePath({ name: 'login' }))
 }
 </script>
 <template>
-    <DropdownMenu>
+    <DropdownMenu v-if="currentUser">
         <DropdownMenuTrigger as-child>
             <component :is="inSidebar ? SidebarMenuButton : 'div'" size="lg"
                 class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
                 <slot>
                     <UserAvatar />
                     <div class="grid flex-1 text-left text-sm leading-tight">
-                        <span class="truncate font-semibold">{{ currentUser.name }}</span>
-                        <span class="truncate text-xs">{{ currentUser.username }}</span>
+                        <span class="truncate font-semibold">{{ currentUser?.name }}</span>
+                        <span class="truncate text-xs">{{ currentUser?.username }}</span>
                     </div>
                     <Icon icon="lucide:chevrons-up-down" class="ml-auto size-4" />
                 </slot>
@@ -38,14 +40,14 @@ function onLogOutClick() {
             <DropdownMenuLabel class="p-0 font-normal">
                 <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                     <Avatar class="h-8 w-8 rounded-lg">
-                        <AvatarImage :src="avatarUrl" :alt="currentUser.username" />
+                        <AvatarImage :src="avatarUrl" :alt="currentUser?.username" />
                         <AvatarFallback class="rounded-lg">
                             {{ initials }}
                         </AvatarFallback>
                     </Avatar>
                     <div class="grid flex-1 text-left text-sm leading-tight">
-                        <span class="truncate font-semibold">{{ currentUser.name }}</span>
-                        <span class="truncate text-xs">{{ currentUser.username }}</span>
+                        <span class="truncate font-semibold">{{ currentUser?.name }}</span>
+                        <span class="truncate text-xs">{{ currentUser?.username }}</span>
                     </div>
                 </div>
             </DropdownMenuLabel>
