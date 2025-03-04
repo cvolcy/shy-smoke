@@ -1,4 +1,5 @@
 import PocketBase from 'pocketbase';
+import bootstrapRepositoriesDepencies from './repositories.di';
 
 export default defineNitroPlugin(async (nitroApp) => {
     const config = useRuntimeConfig();
@@ -7,16 +8,20 @@ export default defineNitroPlugin(async (nitroApp) => {
     pb_admin.autoCancellation(false);
 
     try {
-        const admin = await pb_admin.admins.authWithPassword(config.BACKENDBASE_ADMIN_USER, config.BACKENDBASE_ADMIN_PASS)
-        if (!pb_admin.authStore.isValid || !pb_admin.authStore.isAdmin) {
+        const admin = await pb_admin.collection('_superusers').authWithPassword(config.BACKENDBASE_ADMIN_USER, config.BACKENDBASE_ADMIN_PASS)
+
+        if (!pb_admin.authStore.isValid || !pb_admin.authStore.isSuperuser) {
             throw `Error in admin auth : \n ${JSON.stringify(admin)}`
         }
-    } catch (_) {
+    } catch (error) {
         // clear the auth store on failed refresh
+        console.error(error)
         pb_admin.authStore.clear();
     }
 
     nitroApp.hooks.hook("request", (event) => {
         event.context.$pb_admin = pb_admin
     });
+
+    bootstrapRepositoriesDepencies(nitroApp, pb_admin)
 });
