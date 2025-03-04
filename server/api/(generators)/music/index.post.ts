@@ -2,13 +2,7 @@ import Replicate from 'replicate'
 
 let client: Replicate;
 
-export default defineEventHandler(async (event) => {
-    if (!event.context?.auth.isValid)
-        throw createError({
-            statusCode: 401,
-            statusMessage: 'Unauthorized Access',
-        });
-    
+export default defineEventHandler(async (event) => {    
     if (!client) {
         const config = useRuntimeConfig(event)
         

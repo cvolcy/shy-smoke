@@ -3,13 +3,7 @@ import { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
 
 let client: OpenAIApi;
 
-export default defineEventHandler(async (event) => {
-    if (!event.context?.auth.isValid)
-        throw createError({
-            statusCode: 401,
-            statusMessage: 'Unauthorized Access',
-        });
-    
+export default defineEventHandler(async (event) => {    
     if (!client) {
         const config = useRuntimeConfig(event)
         

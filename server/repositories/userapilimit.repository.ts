@@ -29,6 +29,15 @@ export default class UserApiLimitRepository {
         }
     }
 
+    async increaseApiLimitByUserId(userid: string, amount: number = 1) {
+        const collection = this.pb_admin.collection('userApiLimit')
+
+        const apiLimit = await this.getApiLimitByUserId(userid);
+        collection.update(apiLimit.id, {
+            count: apiLimit.count + amount
+        })
+    }
+
     async isApiLimitOk(userid: string): Promise<boolean> {
         if (!userid || !userid.trim())
             return false
