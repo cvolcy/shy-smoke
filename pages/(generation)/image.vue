@@ -47,9 +47,8 @@ const images = ref<string[]>([])
 
 const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) => {
     try {
-
         images.value = []
-        const { data } = await useFetch('/api/image', {
+        const { data, error } = await useFetch<Array<string>>('/api/image', {
             method: 'POST',
             body: {
                 prompt: values.prompt,
@@ -57,8 +56,11 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
                 resolution: values.resolution,
             }
         })
+        
+        if (error)
+            throw error;
 
-        images.value = data.value! as Array<string>
+        images.value = [...data.value!]
         form.resetForm()
     } catch (error: any) {
         console.log(error);
@@ -166,7 +168,7 @@ function openImage(image: string) {
             <div class="space-y-4 mt-4">
                 <div
                     v-if="isSubmitting"
-                    class="p-20d"
+                    class="p-8 rounded-lg w-full flex items-center justify-center bg-muted"
                 >
                     <Loader />
                 </div>
