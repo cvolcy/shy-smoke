@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { Icon } from '@iconify/vue';
 import type { Product } from '~/server/api/products/index.get';
+import type { RecordModel } from 'pocketbase';
 
 const route = useRoute();
 
@@ -10,6 +11,7 @@ const activateSidebarHeader = ref(false);
 const _ = ['text-sky-500', 'text-violet-500', 'text-emerald-500', 'text-pink-700', 'text-orange-500', 'text-green-500'];
 const products = ref<Array<Product>>([]);
 const { data } = await useFetch('/api/products');
+const { data: counter } = await useFetch<RecordModel>('/api/counter', { key: '/api/counter' });
 products.value = data.value!
 </script>
 <template>
@@ -93,8 +95,9 @@ products.value = data.value!
                         </NuxtLink>
                     </SidebarMenuButton>
                 </SidebarMenuItem>
-            </SidebarMenu>
-            <SidebarMenu>
+                <SidebarMenuItem>
+                    <Counter :counter="counter?.count" />
+                </SidebarMenuItem>
                 <SidebarMenuItem>
                     <UserButton
                         side="bottom"
