@@ -8,10 +8,11 @@ const generatorsRoutes = [
     "/api/video",
 ]
 export default defineEventHandler(async (event) => {
-    console.log('New request: ' + getRequestURL(event))
+    const { pathname } = getRequestURL(event)
+    console.log('New request:', pathname)
 
     // check if the server route is in the (generators) folder
-    if (event.node.req.url && generatorsRoutes.includes(event.node.req.url)) {        
+    if (pathname && generatorsRoutes.includes(pathname)) {
         const { $userApiLimitRepository } = event.context as { $userApiLimitRepository: UserApiLimitRepository }
         
         if (!event.context?.auth.isValid)
