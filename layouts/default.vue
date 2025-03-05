@@ -7,7 +7,10 @@
       <LayoutSidebar />
       <main class="flex grow flex-col">
         <LayoutNavbar />
-        <LayoutSSEListener :debug="false" />
+        <LayoutSSEListener
+          v-if="false"
+          :debug="false"
+        />
         <slot />
         <footer class="flex flex-row flex-grow">
           <div class="container self-end">
