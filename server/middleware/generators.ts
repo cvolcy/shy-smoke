@@ -9,7 +9,6 @@ const generatorsRoutes = [
 ]
 export default defineEventHandler(async (event) => {
     const { pathname } = getRequestURL(event)
-    console.log('New request:', pathname)
 
     // check if the server route is in the (generators) folder
     if (pathname && generatorsRoutes.includes(pathname)) {

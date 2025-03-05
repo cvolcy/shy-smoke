@@ -1,3 +1,37 @@
 {
-    "welcome2": "Bienvenue monde"
+    "welcome2": "Bienvenue monde",
+    "layout": {
+        "settings": "paramètres",
+        "counter": {
+            "freegeneration": "générations gratuites",
+            "upgrade": "mise à niveau"
+        }
+    },
+    "products": {
+        "dashboard": {
+            "label": "Tableau de bord",
+            "title": "Découvrez la puissance de l'IA",
+            "subtitle": "Discutez avec l'IA la plus intelligente - Découvrez la puissance de l'IA"
+        },
+        "conversation": {
+            "label": "Conversation",
+            "description": "Notre modèle de conversation le plus avancé."
+        },
+        "music": {
+            "label": "Génération de musique",
+            "description": "Transformez votre requête en musique"
+        },
+        "image": {
+            "label": "Génération d'image",
+            "description": "Transformez votre requête en image"
+        },
+        "video": {
+            "label": "Génération de vidéo",
+            "description": "Transformez votre requête en vidéo"
+        },
+        "code": {
+            "label": "Génération de code",
+            "description": "Générez du code à partir d'un texte descriptif."
+        }
+    }
 }

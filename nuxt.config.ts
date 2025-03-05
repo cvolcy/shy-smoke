@@ -26,6 +26,7 @@ export default defineNuxtConfig({
       { code: 'fr', language: 'fr-CA', name: 'Français', files: ['fr.json'] }
     ],
     defaultLocale: 'en',
+    lazy: false
   },
   runtimeConfig: {
     BACKENDBASE_ADMIN_USER: process.env.BACKENDBASE_ADMIN_USER,

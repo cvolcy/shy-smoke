@@ -78,7 +78,7 @@ products.value = data.value!
                         <SidebarMenuButton as-child :is-active="route.path === product.to ? true : undefined">
                             <NuxtLink :to="product.to">
                                 <Icon :icon="product.icon" :class="product.iconColor" width="24" height="24" />
-                                <span>{{ product.label }}</span>
+                                <span>{{ $t(`products.${product.id}.label`) }}</span>
                             </NuxtLink>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -91,12 +91,15 @@ products.value = data.value!
                     <SidebarMenuButton as-child>
                         <NuxtLink to="/">
                             <Icon icon="lucide:settings" width="24" height="24" />
-                            <span>Settings</span>
+                            <span class="capitalize">{{ $t('layout.settings')}}</span>
                         </NuxtLink>
                     </SidebarMenuButton>
                 </SidebarMenuItem>
-                <SidebarMenuItem>
+                <SidebarMenuItem class="group-data-[collapsible=icon]:hidden">
                     <Counter :counter="counter?.count" />
+                </SidebarMenuItem>
+                <SidebarMenuItem class="hidden group-data-[collapsible=icon]:block">
+                    <Counter :counter="counter?.count" :mini="true" />
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                     <UserButton

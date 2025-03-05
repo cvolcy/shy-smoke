@@ -9,11 +9,11 @@ const initials = currentUser?.name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/
 </script>
 <template>
     <header class="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear">
-        <div class="flex items-center gap-2 px-4">
-            <Button :variant="null">
-                <SidebarTrigger />
-            </Button>
-        </div>
+        <ClientOnly>
+            <div class="flex items-center gap-2 px-4">
+                <SidebarTrigger class="h-12 w-12 [&_svg]:size-5" />
+            </div>
+        </ClientOnly>
         <div class="flex w-full justify-end px-2">
             <LayoutLocaleSwitcher
                 class="mr-4"

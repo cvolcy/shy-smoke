@@ -14,10 +14,10 @@ products.value = data.value!.filter( x => x.id != 'dashboard' )
     <div class="container">
         <div class="mb-8 space-y-4">
             <h2 class="text-2xl md:text-4xl font-bold text-center">
-                Explore the power of AI
+                {{ $t('products.dashboard.title') }}
             </h2>
             <p class="text-muted-foreground font-light text-sm md:text-lg text-center">
-                Chat with the smartest AI - Experience the power of AI
+                {{ $t('products.dashboard.subtitle') }}
             </p>
             <div class="px-4 md:px-20 lg:px-32 space-y-4">
                 <Card
@@ -33,7 +33,7 @@ products.value = data.value!.filter( x => x.id != 'dashboard' )
                                     <Icon :icon="product.icon" :class="cn('w-8 h-8', product.iconColor)" />
                                 </div>
                                 <div class="font-semibold">
-                                    {{ product.label }}
+                                    {{ $t(`products.${product.id}.label`) }}
                                 </div>
                             </div>
                             <Icon icon="lucide:arrow-right" class="w-5 h-5" />

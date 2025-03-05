@@ -1,3 +1,37 @@
 {
-    "welcome2": "Hello World"
+    "welcome2": "Hello World",
+    "layout": {
+        "settings": "settings",
+        "counter": {
+            "freegeneration": "free generation",
+            "upgrade": "upgrade"
+        }
+    },
+    "products": {
+        "dashboard": {
+            "label": "Dashboard",
+            "title": "Explore the power of AI",
+            "subtitle": "Chat with the smartest AI - Experience the power of AI"
+        },
+        "conversation": {
+            "label": "Conversation",
+            "description": "Our most advanced conversation model."
+        },
+        "music": {
+            "label": "Music Generation",
+            "description": "Turn your prompt into music"
+        },
+        "image": {
+            "label": "Image Generation",
+            "description": "Turn your prompt into an image"
+        },
+        "video": {
+            "label": "Video Generation",
+            "description": "Turn your prompt into a video"
+        },
+        "code": {
+            "label": "Code Generation",
+            "description": "Generate code using descriptive text."
+        }
+    }
 }
