@@ -54,6 +54,8 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
         form.resetForm()
     } catch (error: any) {
         console.log(error);
+    } finally {
+        await refreshNuxtData('/api/counter')
     }
 
     return false;
