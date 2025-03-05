@@ -18,7 +18,8 @@ export default defineEventHandler(async (event) => {
         if (!event.context?.auth.isValid)
             throw createError({
                 statusCode: 401,
-                statusMessage: 'Unauthorized Access',
+                statusMessage: 'Unauthorized',
+                message: 'Unauthorized Access',
                 stack: ""
             });
         
@@ -27,7 +28,8 @@ export default defineEventHandler(async (event) => {
         if (!creditAvailables) {
             throw createError({
                 statusCode: 403,
-                statusMessage: "No credit available",
+                statusMessage: "Forbidden",
+                message: "No credit available",
                 stack: ""
             })
         }

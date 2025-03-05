@@ -17,7 +17,9 @@ export default defineEventHandler((event) => {
     if (!event.context?.auth.isValid)
         throw createError({
             statusCode: 401,
-            statusMessage: 'Unauthorized Access',
+            statusMessage: 'Unauthorized',
+            message: 'Unauthorized Access',
+            stack: ""
         });
 
     setResponseHeader(event, 'Content-Type', 'text/event-stream')
