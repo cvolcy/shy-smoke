@@ -11,6 +11,7 @@ const props = withDefaults(defineProps<{
 })
 
 const clampedCounter = computed(() => Math.min(Math.max(props.counter, 0), MAX_FREE_COUNTS))
+const { isOpen: isProSubModalOpen } = useProSub()
 </script>
 <template>
     <div>
@@ -37,6 +38,7 @@ const clampedCounter = computed(() => Math.min(Math.max(props.counter, 0), MAX_F
                     class="w-full"
                     size="icon"
                     variant="premium"
+                    @click="isProSubModalOpen = true"
                 >
                     <span
                         v-if="!mini"

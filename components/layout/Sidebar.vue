@@ -16,6 +16,7 @@ products.value = data.value!
 </script>
 <template>
     <Sidebar class="bg-neutral-900" collapsible="icon">
+        <ProSubModal />
         <SidebarHeader v-if="!activateSidebarHeader" class="flex-row items-center">
                 <Logo class="fill-slate-300 size-8" />
             <SidebarGroup class="group-data-[collapsible=icon]:hidden">
