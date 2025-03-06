@@ -37,20 +37,14 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
 
         const newMessages = [...messages.value, userMessage]
 
-        const { data } = await useFetch<ChatCompletionMessageParam[]>('/api/code', {
+        const data = await $fetch<ChatCompletionMessageParam[]>('/api/code', {
             method: 'POST',
             body: {
                 messages: newMessages
-            },
-            transform: (input: ChatCompletionMessageParam[]) => {
-                return input.map(x => ({
-                    role: x.role,
-                    content: x.content
-                }) as ChatCompletionMessageParam);
             }
         })
 
-        messages.value = [...newMessages, ...data.value!]
+        messages.value = [...newMessages, ...data!]
 
         form.resetForm()
     } catch (error: any) {

@@ -48,7 +48,7 @@ const images = ref<string[]>([])
 const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) => {
     try {
         images.value = []
-        const { data, error } = await useFetch<Array<string>>('/api/image', {
+        const data = await $fetch<Array<string>>('/api/image', {
             method: 'POST',
             body: {
                 prompt: values.prompt,
@@ -57,10 +57,7 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
             }
         })
         
-        if (error)
-            throw error;
-
-        images.value = [...data.value!]
+        images.value = [...data!]
         form.resetForm()
     } catch (error: any) {
         console.log(error);

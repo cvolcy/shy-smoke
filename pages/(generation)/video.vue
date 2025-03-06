@@ -33,12 +33,12 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
     try {
         video.value = null;
 
-        const { data } = await useFetch<string[]>('/api/video', {
+        const data = await $fetch<string[]>('/api/video', {
             method: 'POST',
             body: values
         })
 
-        video.value = data.value?.length ? data.value[0] : ""
+        video.value = data?.length ? data[0] : ""
 
         form.resetForm()
     } catch (error: any) {

@@ -30,15 +30,12 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
     try {
         music.value = null;
 
-        const { data } = await useFetch<string>('/api/music', {
+        const data = await $fetch<{ audio: string }>('/api/music', {
             method: 'POST',
-            body: values,
-            transform: (input: any) => {
-                return input.audio;
-            }
+            body: values
         })
 
-        music.value = data.value;
+        music.value = data.audio;
 
         form.resetForm()
     } catch (error: any) {
