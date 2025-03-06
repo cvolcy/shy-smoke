@@ -78,8 +78,8 @@ function openImage(image: string) {
 <template>
     <div class="container">
         <LayoutHeading
-            :title="product!.label"
-            :description="product!.description"
+            :title="$t(`products.${product!.id}.label`)"
+            :description="$t(`products.${product!.id}.description`)"
             :bg-color="product!.bgColor"
             :icon="product!.icon"
             :icon-color="product!.iconColor"
