@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MAX_FREE_COUNTS } from '~/lib/contants';
+import { MAX_FREE_COUNTS } from '@/lib/contants';
 import { cn } from '@/lib/utils';
 import { Icon } from '@iconify/vue';
 

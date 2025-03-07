@@ -15,7 +15,12 @@
         },
         "conversation": {
             "label": "Conversation",
-            "description": "Notre modèle de conversation le plus avancé."
+            "description": "Notre modèle de conversation le plus avancé.",
+            "generate": "générer",
+            "empty": "Aucune conversation",
+            "prompt": {
+                "placeholder": "pourquoi gargamel veut attraper les schtroumpfs ?"
+            }
         },
         "music": {
             "label": "Génération de musique",

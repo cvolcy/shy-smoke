@@ -15,7 +15,12 @@
         },
         "conversation": {
             "label": "Conversation",
-            "description": "Our most advanced conversation model."
+            "description": "Our most advanced conversation model.",
+            "generate": "generate",
+            "empty": "No conversation started",
+            "prompt": {
+                "placeholder": "What is the One piece ?"
+            }
         },
         "music": {
             "label": "Music Generation",

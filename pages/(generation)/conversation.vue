@@ -79,7 +79,7 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
                                 <Input
                                     class="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                                     type="text"
-                                    placeholder="What is the One piece ?"
+                                    :placeholder="$t('products.conversation.prompt.placeholder')"
                                     v-bind="componentField"
                                     :disabled="isSubmitting"
                                 />
@@ -88,10 +88,10 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
                         </FormItem>
                     </FormField>
                     <Button
-                        class="col-span-12 md:col-span-4 lg:col-span-2"
+                        class="col-span-12 md:col-span-4 lg:col-span-2 capitalize"
                         :disabled="isSubmitting"
                     >
-                        Generate
+                        {{ $t('products.conversation.generate') }}
                     </Button>
                 </form>
             </div>
@@ -103,7 +103,7 @@ const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) =>
                     <Loader />
                 </div>
                 <div v-if="messages.length === 0 && !isSubmitting">
-                    <Empty label="No conversation started" fill="#8b5cf6" />
+                    <Empty :label="$t('products.conversation.empty')" fill="#8b5cf6" />
                 </div>
                 <div class="flex flex-col-reverse gap-y-4">
                     <div
