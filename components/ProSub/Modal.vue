@@ -9,7 +9,25 @@ const { data: products } = await useFetch('/api/products', {
     transform(input) {
         return input.filter( x => x.id != 'dashboard' )
     }
-});
+})
+
+const isLoading = ref(false)
+
+async function onSubscribe() {
+    try {
+        isLoading.value = true
+        const response = await $fetch('/api/payments', {
+            key: '/api/payments',
+            method: 'GET'
+        })
+
+        window.location.href = response
+    } catch (error: any) {
+        console.error(error)
+    } finally {
+        isLoading.value = false
+    }
+}
 </script>
 <template>
     <div>
@@ -50,6 +68,8 @@ const { data: products } = await useFetch('/api/products', {
                         class="w-full"
                         size="lg"
                         variant="premium"
+                        @click="onSubscribe"
+                        :disabled="isLoading"
                     >  
                         <span class="capitalize">
                             {{ $t('layout.counter.upgrade')}}
