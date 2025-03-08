@@ -191,7 +191,7 @@ function openImage(image: string) {
                                 class="w-full"
                                 @click="openImage(image)"
                             >
-                                <Icon icon="lucinde:download" class="w-4 h-4 mr-2" />
+                                <Icon icon="lucide:download" class="w-4 h-4 mr-2" />
                                 Download
                             </Button>
                         </CardFooter>
