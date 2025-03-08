@@ -38,5 +38,18 @@
             "label": "Code Generation",
             "description": "Generate code using descriptive text."
         }
+    },
+    "settings": {
+        "title": "Settings",
+        "description": "Manage account settings",
+        "icon": "lucide:settings"
+    },
+    "subscription": {
+        "pro": {
+            "message": "You are currently on a pro plan."
+        },
+        "free": {
+            "message": "You are currently on a free trial."
+        }
     }
 }

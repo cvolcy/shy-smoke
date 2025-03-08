@@ -38,5 +38,18 @@
             "label": "Génération de code",
             "description": "Générez du code à partir d'un texte descriptif."
         }
+    },
+    "settings": {
+        "title": "Paramètres",
+        "description": "Gérez les paramètres de votre compte.",
+        "icon": "lucide:settings"
+    },
+    "subscription": {
+        "pro": {
+            "message": "Vous êtes actuellement dans un abonnement pro."
+        },
+        "free": {
+            "message": "Vous êtes actuellement dans une periode d'essai gratuit."
+        }
     }
 }
