@@ -1,5 +1,6 @@
 import PocketBase from 'pocketbase';
 import bootstrapRepositoriesDepencies from './repositories.di';
+import bootstrapServicesDepencies from './services.di';
 
 export default defineNitroPlugin(async (nitroApp) => {
     const config = useRuntimeConfig();
@@ -24,4 +25,5 @@ export default defineNitroPlugin(async (nitroApp) => {
     });
 
     bootstrapRepositoriesDepencies(nitroApp, pb_admin)
+    bootstrapServicesDepencies(nitroApp)
 });
