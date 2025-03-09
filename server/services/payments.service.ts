@@ -60,7 +60,7 @@ export default class PaymentsService {
                         name: 'Shy Smoke',
                         description: 'a bunch of credit'
                     },
-                    unit_amount: 2000,
+                    unit_amount: 800,
                     recurring: {
                         interval: 'month',
                       },
