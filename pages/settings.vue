@@ -1,6 +1,9 @@
 <script setup lang="ts">
+definePageMeta({
+    name: 'settings'
+})
 
-const { data: subscription } = useFetch('/api/subscription')
+const { data: subscription } = useFetch('/api/subscription', { key: '/api/subscription' })
 </script>
 <template>
     <div class="container">
@@ -20,6 +23,7 @@ const { data: subscription } = useFetch('/api/subscription')
                     {{ $t(`subscription.free.message`) }}
                 </span>
             </div>
+            <SubscriptionButton :is-pro="subscription?.isValid === true" />
         </div>
     </div>
 </template>

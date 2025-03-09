@@ -46,9 +46,11 @@
     },
     "subscription": {
         "pro": {
+            "manage": "manage",
             "message": "You are currently on a pro plan."
         },
         "free": {
+            "upgrade": "upgrade",
             "message": "You are currently on a free trial."
         }
     }

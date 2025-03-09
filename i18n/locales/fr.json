@@ -41,14 +41,16 @@
     },
     "settings": {
         "title": "Paramètres",
-        "description": "Gérez les paramètres de votre compte.",
+        "description": "Paramètres de votre compte.",
         "icon": "lucide:settings"
     },
     "subscription": {
         "pro": {
+            "manage": "gestion de l'abonnement",
             "message": "Vous êtes actuellement dans un abonnement pro."
         },
         "free": {
+            "upgrade": "mise à niveau",
             "message": "Vous êtes actuellement dans une periode d'essai gratuit."
         }
     }
