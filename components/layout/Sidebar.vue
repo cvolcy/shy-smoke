@@ -12,6 +12,7 @@ const _ = ['text-sky-500', 'text-violet-500', 'text-emerald-500', 'text-pink-700
 const products = ref<Array<Product>>([]);
 const { data } = await useFetch('/api/products');
 const { data: counter } = await useFetch<RecordModel>('/api/counter', { key: '/api/counter' });
+const { data: subscription } = await useFetch('/api/subscription', { key: '/api/subscription' });
 products.value = data.value!
 </script>
 <template>
@@ -90,16 +91,22 @@ products.value = data.value!
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton as-child>
-                        <NuxtLink to="/">
+                        <NuxtLink to="/settings">
                             <Icon icon="lucide:settings" width="24" height="24" />
                             <span class="capitalize">{{ $t('layout.settings')}}</span>
                         </NuxtLink>
                     </SidebarMenuButton>
                 </SidebarMenuItem>
-                <SidebarMenuItem class="group-data-[collapsible=icon]:hidden">
+                <SidebarMenuItem
+                    v-if="subscription?.isValid !== true"
+                    class="group-data-[collapsible=icon]:hidden"
+                >
                     <Counter :counter="counter?.count" />
                 </SidebarMenuItem>
-                <SidebarMenuItem class="hidden group-data-[collapsible=icon]:block">
+                <SidebarMenuItem
+                    v-if="subscription?.isValid !== true"
+                    class="hidden group-data-[collapsible=icon]:block"
+                >
                     <Counter :counter="counter?.count" :mini="true" />
                 </SidebarMenuItem>
                 <SidebarMenuItem>

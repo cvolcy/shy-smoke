@@ -1,4 +1,5 @@
 import UserApiLimitRepository from "../repositories/userapilimit.repository"
+import getSubscription from '../api/subscription/index.get'
 
 const generatorsRoutes = [
     "/api/code",
@@ -23,8 +24,9 @@ export default defineEventHandler(async (event) => {
             });
         
         const creditAvailables = await $userApiLimitRepository.isApiLimitOk(event.context.auth.record.id)
+        const { isValid } = await getSubscription(event)
         
-        if (!creditAvailables) {
+        if (isValid !== true && !creditAvailables) {
             throw createError({
                 statusCode: 403,
                 statusMessage: "Forbidden",
@@ -33,8 +35,9 @@ export default defineEventHandler(async (event) => {
             })
         }
 
-        event.node.res.on("finish", async () => { 
-            await $userApiLimitRepository.increaseApiLimitByUserId(event.context.auth.record.id)
+        event.node.res.on("finish", async () => {
+            if (isValid !== true)
+                await $userApiLimitRepository.increaseApiLimitByUserId(event.context.auth.record.id)
         })
     }
 })
