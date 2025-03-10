@@ -18,8 +18,7 @@ export default defineEventHandler(async (event) => {
             message: 'Unauthorized Access',
             stack: ""
         });
-
-        
+    
     try {
         const { $paymentsService } = event.context as { $paymentsService: PaymentsService }
         const { id: userId } = event.context.auth.record;

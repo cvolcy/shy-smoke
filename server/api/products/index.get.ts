@@ -1,3 +1,5 @@
+import GetSubscription from '../subscription/index.get'
+
 export interface Product {
     id: string,
     icon: string,
@@ -5,9 +7,10 @@ export interface Product {
     bgColor: string,
     to: string,
     disabled?: boolean,
+    isProSubscriptionRequired?: boolean
 }
 
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
     if (!event.context?.auth.isValid)
         throw createError({
             statusCode: 401,
@@ -15,8 +18,8 @@ export default defineEventHandler((event) => {
             message: 'Unauthorized Access',
             stack: ""
         });
-
-
+    
+    const { isValid: hasProSubscription } = await GetSubscription(event)
 
     let products = [{
         id: 'dashboard',
@@ -36,21 +39,20 @@ export default defineEventHandler((event) => {
         iconColor: 'text-emerald-500',
         bgColor: 'bg-emerald-500/10',
         to: '/music',
-        disabled: false
+        isProSubscriptionRequired: true
     },{
         id: 'image',
         icon: 'lucide:image',
         iconColor: 'text-pink-700',
         bgColor: 'bg-pink-700/10',
         to: '/image',
-        disabled: false
     },{
         id: 'video',
         icon: 'lucide:video',
         iconColor: 'text-orange-500',
         bgColor: 'bg-orange-500/10',
         to: '/video',
-        disabled: true
+        isProSubscriptionRequired: true
     },{
         id: 'code',
         icon: 'lucide:code',
@@ -62,7 +64,7 @@ export default defineEventHandler((event) => {
     const query = getQuery(event)
 
     if (!query.includeDisabled) {
-        products = products.filter(x => !x.disabled)
+        products = products.filter(x => !x.disabled && (!x.isProSubscriptionRequired == true || hasProSubscription))
     }
 
     return products;
