@@ -45,7 +45,7 @@ async function onLogin(e: Event) {
 function redirect() {
   const router = useRouter()
   const route = useRoute()
-  router.push({ path: route.query.redirect_url?.toString() ?? '/' });
+  router.push({ path: route.query.redirect_url?.toString() ?? '/dashboard' });
 }
 
 function setCaplockState(e: KeyboardEvent) {
