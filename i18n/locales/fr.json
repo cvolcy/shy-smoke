@@ -1,5 +1,95 @@
 {
     "welcome2": "Bienvenue monde",
+    "landing": {
+        "nav": {
+            "button": "Commencer"
+        },
+        "hero": {
+            "title": "Le meilleur outil IA pour",
+            "description": "Créez du contenu 10 fois plus rapidement grâce à l'IA.",
+            "button": "Commencez à générer gratuitement",
+            "nocredit": "Pas de carte de crédit requise.",
+            "products": [
+                "Chatbot.",
+                "Génération de photos.",
+                "Génération de musique.",
+                "Génération de code.",
+                "Génération de vidéos."
+            ]
+        },
+        "content": {
+            "testimonials": {
+                "title": "Témoignages",
+                "list": [
+                    {
+                        "name": "Jake",
+                        "title": "Ingénieur logiciel",
+                        "description": "C'est la meilleure application que j'ai utilisée !"
+                    },
+                    {
+                        "name": "Emily",
+                        "title": "Graphiste",
+                        "description": "Les capacités créatives de l'IA sont époustouflantes !"
+                    },
+                    {
+                        "name": "Michael",
+                        "title": "Créateur de contenu",
+                        "description": "Je n'ai jamais été aussi productif dans mon travail."
+                    },
+                    {
+                        "name": "Sophia",
+                        "title": "Responsable marketing",
+                        "description": "Un outil indispensable pour quiconque travaille dans le marketing digital."
+                    },
+                    {
+                        "name": "Daniel",
+                        "title": "Monteur vidéo",
+                        "description": "Ça rend le montage vidéo facile."
+                    },
+                    {
+                        "name": "Olivia",
+                        "title": "Écrivaine",
+                        "description": "Cette application a révolutionné ma façon d'écrire."
+                    },
+                    {
+                        "name": "James",
+                        "title": "Développeur de logiciels",
+                        "description": "Un outil indispensable pour le codage et le développement."
+                    },
+                    {
+                        "name": "Ava",
+                        "title": "Producteur de musique",
+                        "description": "La fonction de génération de musique est tout simplement incroyable !"
+                    },
+                    {
+                        "name": "William",
+                        "title": "Photographe",
+                        "description": "J'adore comment ça améliore mes images sans effort."
+                    },
+                    {
+                        "name": "Mia",
+                        "title": "Chef de projet",
+                        "description": "C'est comme avoir un membre d'équipe supplémentaire."
+                    },
+                    {
+                        "name": "Benjamin",
+                        "title": "Enseignant",
+                        "description": "Une excellente ressource pour créer du contenu engageant."
+                    },
+                    {
+                        "name": "Charlotte",
+                        "title": "Blogueuse",
+                        "description": "Mon blog n'a jamais été aussi vivant et engageant."
+                    },
+                    {
+                        "name": "Ethan",
+                        "title": "Développeur d'applications",
+                        "description": "Cette IA porte le développement d'applications à un niveau supérieur !"
+                    }
+                ]
+            }
+        }
+    },
     "layout": {
         "settings": "paramètres",
         "counter": {

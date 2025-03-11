@@ -1,5 +1,92 @@
 {
     "welcome2": "Hello World",
+    "landing": {
+        "nav": {
+            "button": "Get Started"
+        },
+        "hero": {
+            "title": "The Best AI Tool for",
+            "description": "Create content using AI 10x faster.",
+            "button": "Start Generating for Free",
+            "nocredit": "No credit card required.",
+            "products": [
+                "Chatbot.",
+                "Photo Generation.",
+                "Music Generation.",
+                "Code Generation.",
+                "Video Generation."
+            ]
+        },
+        "content": {
+            "testimonials": {
+                "title": "Testimonials",
+                "list": [{
+                    "name": "Jake",
+                    "title": "Software engineer",
+                    "description": "This is the best application I've used!"
+                },{
+                    "name": "Emily",
+                    "title": "Graphic Designer",
+                    "description": "The AI's creative abilities are mind-blowing!"
+                },
+                {
+                    "name": "Michael",
+                    "title": "Content Creator",
+                    "description": "I've never been more productive with my work."
+                },
+                {
+                    "name": "Sophia",
+                    "title": "Marketing Manager",
+                    "description": "A must-have tool for anyone in digital marketing."
+                },
+                {
+                    "name": "Daniel",
+                    "title": "Video Editor",
+                    "description": "It makes video editing a breeze."
+                },
+                {
+                    "name": "Olivia",
+                    "title": "Writer",
+                    "description": "This app has revolutionized the way I write."
+                },
+                {
+                    "name": "James",
+                    "title": "Software Developer",
+                    "description": "An indispensable tool for coding and development."
+                },
+                {
+                    "name": "Ava",
+                    "title": "Music Producer",
+                    "description": "The music generation feature is just incredible!"
+                },
+                {
+                    "name": "William",
+                    "title": "Photographer",
+                    "description": "I love how it enhances my images effortlessly."
+                },
+                {
+                    "name": "Mia",
+                    "title": "Project Manager",
+                    "description": "It's like having an extra team member."
+                },
+                {
+                    "name": "Benjamin",
+                    "title": "Teacher",
+                    "description": "A great resource for creating engaging content."
+                },
+                {
+                    "name": "Charlotte",
+                    "title": "Blogger",
+                    "description": "My blog has never been more lively and engaging."
+                },
+                {
+                    "name": "Ethan",
+                    "title": "App Developer",
+                    "description": "This AI takes app development to the next level!"
+                }]
+            }
+        }
+    },
     "layout": {
         "settings": "settings",
         "counter": {
