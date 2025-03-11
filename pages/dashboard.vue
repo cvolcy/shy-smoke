@@ -6,9 +6,7 @@ import type { Product } from '~/server/api/products/index.get';
 const router = useRouter();
 
 const _ = ['text-violet-500', 'bg-violet-500/10', 'text-emerald-500', 'bg-emerald-500/10', 'text-pink-700', 'bg-pink-700/10', 'text-orange-500', 'bg-orange-500/10', 'text-green-500', 'bg-green-500/10',];
-const products = ref<Array<Product>>([]);
-const { data } = await useFetch('/api/products');
-products.value = data.value!.filter( x => x.id != 'dashboard' )
+const { data: products } = await useFetch('/api/products', { key: '/api/products' });
 </script>
 <template>
     <div class="container">
@@ -21,7 +19,7 @@ products.value = data.value!.filter( x => x.id != 'dashboard' )
             </p>
             <div class="px-4 md:px-20 lg:px-32 space-y-4">
                 <Card
-                    v-for="product in products"
+                    v-for="product in products?.filter(x => x.id !== 'dashboard')"
                     :key="product.to"
                     class="p-4 border-black/5 hover:shadow-md transition cursor-pointer"
                     @click="router.push(product.to)"

@@ -1,6 +1,6 @@
 import getProducts from './index.get';
 
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
     const productId = getRouterParam(event, 'productId');
     if (!productId || !productId.trim())
         throw createError({
@@ -8,7 +8,7 @@ export default defineEventHandler((event) => {
             statusMessage: 'invalid or missing product ID'
         });
 
-    const products = getProducts(event);
+    const products = await getProducts(event);
     const product = products.find(x => x.id == productId);
 
     if (!product)

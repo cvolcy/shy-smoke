@@ -9,11 +9,9 @@ const route = useRoute();
 const activateSidebarHeader = ref(false);
 
 const _ = ['text-sky-500', 'text-violet-500', 'text-emerald-500', 'text-pink-700', 'text-orange-500', 'text-green-500'];
-const products = ref<Array<Product>>([]);
-const { data } = await useFetch('/api/products');
+const { data: products } = await useFetch('/api/products', { key: '/api/products?sidebar' });
 const { data: counter } = await useFetch<RecordModel>('/api/counter', { key: '/api/counter' });
 const { data: subscription } = await useFetch('/api/subscription', { key: '/api/subscription' });
-products.value = data.value!
 </script>
 <template>
     <Sidebar class="bg-neutral-900" collapsible="icon">
