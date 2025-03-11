@@ -13,7 +13,7 @@ const products = tm('landing.hero.products').map(rt)
             <h1>
                 {{ $t('landing.hero.title') }}
             </h1>
-            <div class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+            <div class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 pb-4">
                 <VueWriter :array="products" />
             </div>
         </div>
