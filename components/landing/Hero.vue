@@ -3,9 +3,9 @@
 import { VueWriter } from 'vue-writer'
 const { $pb } = useNuxtApp();
 const isLoggedIn = $pb.authStore.isValid;
-const { te, tm } = useI18n()
+const { tm, rt } = useI18n()
 // @ts-ignore
-const products = tm('landing.hero.products').map(x => x.loc.source)
+const products = tm('landing.hero.products').map(rt)
 </script>
 <template>
     <div class="text-white font-bold py-36 text-center space-y-5">

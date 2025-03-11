@@ -1,13 +1,10 @@
 <script setup lang="ts">
-const { $pb } = useNuxtApp();
-
 const { tm, rt } = useI18n()
 
-const isLoggedIn = $pb.authStore.isValid;
 // @ts-ignore
 const testimonials: Array<{ name: string, title: string, description: string }> = tm('landing.content.testimonials.list').map(x => {
     let obj: any = {};
-    Object.keys(x).map(k => obj[k] = x[k].loc.source)
+    Object.keys(x).map(k => obj[k] = rt(x[k]))
     return obj
 })
 .sort(() => Math.random() - 0.5)

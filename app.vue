@@ -11,7 +11,7 @@ useHead({
   <div>
     <NuxtLoadingIndicator
       color="repeating-linear-gradient(to right, rgb(99, 102, 241), rgb(168, 85, 247), rgb(236, 72, 153))"
-      height="4"
+      :height="4"
     />
     <NuxtLayout>
       <NuxtRouteAnnouncer />
