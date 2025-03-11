@@ -17,12 +17,17 @@ const { data: subscription } = await useFetch('/api/subscription', { key: '/api/
     <Sidebar class="bg-neutral-900" collapsible="icon">
         <ProSubModal />
         <SidebarHeader v-if="!activateSidebarHeader" class="flex-row items-center">
+            <NuxtLink
+                href="/dashboard"
+                class="contents logo-title"
+            >
                 <Logo class="fill-slate-300 size-8" />
-            <SidebarGroup class="group-data-[collapsible=icon]:hidden">
-                <span class="text-2xl font-mono text-nowrap">
-                    SHY-SMOKE|ai
-                </span>
-            </SidebarGroup>
+                <SidebarGroup class="group-data-[collapsible=icon]:hidden">
+                    <span class="text-2xl text-nowrap">
+                        SHY SMOKE | AI
+                    </span>
+                </SidebarGroup>
+            </NuxtLink>
         </SidebarHeader>
         <SidebarHeader v-if="activateSidebarHeader">
             <SidebarMenu>
@@ -117,3 +122,8 @@ const { data: subscription } = await useFetch('/api/subscription', { key: '/api/
         </SidebarFooter>
     </Sidebar>
 </template>
+<style scope>
+.logo-title {    
+    font-family: "Montserrat", sans-serif;
+}
+</style>
