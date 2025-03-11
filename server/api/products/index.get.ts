@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
     let products = [{
         id: 'dashboard',
         icon: 'lucide:layout-dashboard',
-        to: '/',
+        to: '/dashboard',
         iconColor: 'text-sky-500',
         bgColor: 'bg-sky-500/10',
     },{
